@@ -1,8 +1,7 @@
-import { LoginController } from './login'
-import { HttpRequest, EmailValidator } from '../signup/protocols'
+import { InvalidParamError, MissingParamError } from '../../errors'
 import { badRequest, serverError, unauthorized } from '../../helpers/http-helper'
-import { MissingParamError, InvalidParamError } from '../../errors'
-import { Authentication } from '../../../domain/usecases/authentication'
+import { LoginController } from './login'
+import { Authentication, EmailValidator, HttpRequest } from './login-protocols'
 
 const makeRequest = (): HttpRequest => ({
   body: {
