@@ -6,10 +6,10 @@ import { Controller } from '../../../../presentation/protocols'
 import { LogControllerDecorator } from '../../../decorators/log-controller-decorator'
 import { LogMongoRepository } from '../../../../infra/db/mongodb/log/log-mongo-repository'
 import { makeSignUpValidation } from './signup-validation-factory'
+import config from '../../../config/env'
 
 export const makeSignUpController = (): Controller => {
-  const salt = 8
-  const bcryptAdapter = new BcryptAdapter(salt)
+  const bcryptAdapter = new BcryptAdapter(config.salt)
   const accountMongoRepository = new AccountMongoRepository()
   const dbAddAccount = new DbAddAccount(bcryptAdapter, accountMongoRepository)
   const signUpController = new SignUpController(dbAddAccount, makeSignUpValidation())
